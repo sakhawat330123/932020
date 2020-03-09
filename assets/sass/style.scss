@@ -1,0 +1,118 @@
+@import 'color';
+
+#login_body{
+    background-image: url(../img/login.jpg);    
+}
+#login_bg{
+    .form-group{
+        label{
+            color: $text_color;
+            font-size: 22px;
+            text-transform: uppercase;
+            font-weight: bolder;
+        }
+    }
+}
+
+.index_body{
+    margin: 52px 0px 0px;
+}
+
+#home_bg{
+    .bg-dark {
+    background-color: #0a3867!important;    
+    }
+    .navbar-brand{
+        font-size: 16px;
+        img{
+            width: 54px;
+            height: 24px;
+            color: white;
+        }
+    }
+    .navbar-dark .navbar-nav .nav-link{
+        color: white;
+    }
+    .navbar-nav{
+        .nav-item{
+            a{
+                text-transform: uppercase;
+                font-weight: bold;
+                transition: 0.4s;
+                &:hover{
+                    background-color: white;
+                    color: black;
+                    border-radius: 4px;
+                }
+            }
+            .dropdown-menu{
+                    left: -115px;
+                a{
+                    text-transform: capitalize;
+                    border-bottom: 1px solid #112954;
+                    padding: 1px 24px;
+                    line-height: 25px;
+                    font-size: 14px;
+                    &:last-child{
+                        border-bottom: 0px solid $backcolor;                        
+                    }
+                    &:hover{
+                            background-color: #0a3867;
+                            display: inline-block;
+                            color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#show_meal_bg{
+    .form-group{
+        label{
+            text-transform: uppercase;
+        }
+        input{
+            margin-left: 10px;
+        }
+    }
+    .table_bg{
+        padding: 30px 0;
+    }    
+}
+
+#footer_bg{
+    background-color: #154e88;
+    color: white;
+    padding: 5px 0;
+    p{
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

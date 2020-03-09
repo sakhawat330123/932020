@@ -25,7 +25,7 @@ if (isset($_POST['reg'])) {
 	    echo "Error: " . $sql . "<br>" . $conn->error;
 	}	
 } //end
-
+// login code
 if (isset($_POST['login'])) {
 	$umail = purify_input($_POST['umail']);
 	$upass = purify_input($_POST['upass']);
@@ -34,8 +34,9 @@ if (isset($_POST['login'])) {
 	$logSql = "SELECT * FROM `register` WHERE 'email'= '$umail' AND 'pwd'= '$hUpass'";
 	$row = $conn->query($logSql); 
 	if ($row > 0) {
-		$_SESSION['logId'] = $_POST['regid'];
-		$_SESSION['logEmail'] = $_POST['umail'];
+		$_SESSION['regid'] = $_POST['regid'];
+		$_SESSION['umail'] = $_POST['umail'];
+		$_SESSION['fname'] = $_POST['fname'];		
 		$needPage = 'welcome.php';
 		$host = $_SERVER['HTTP_HOST']; // localhost
 		$url = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -45,11 +46,24 @@ if (isset($_POST['login'])) {
 	}else{
 		echo "<script>alert('Invalid username or password')</script>";
 	}
+} // end
+
+if (isset($_POST['forgetMail'])) {
+	$femail = purify_input($_POST['femail']);
+	$fmailSQL = "SELECT email, password FROM register WHERE email = '$femail'";
+	$result = $conn->query($fmailSQL);
+	$rowf = $result->fetch_assoc();
+	if ($rowf > 0) {
+		$sent = $rowf['email'];
+		$sendpow = $row['pwd'];
+		$sub = "This this about your password";
+		$sms = "Your password is : ". $sendpow;
+		mail($sent,$sub,$sms, "From: $sent");
+		echo "<script>alart('Your passowrd has been sent. Check your email');</script>";
+	}else{
+		echo "<script>alart('this mail not registered. register first');</script>";
+	}
 }
-
-
-
-
 
  ?>
 
@@ -119,12 +133,12 @@ require "include/header.php";
 					</form>
 				</div>
 				<div id="menu2" class="container tab-pane fade"><br>
-					<form action="/action_page.php">
+					<form method="post" action="" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="email">Email address:</label>
-							<input type="email" class="form-control" placeholder="Enter your registered email" id="email">
+							<input type="email" name="femail" class="form-control" placeholder="Enter your registered email" id="email">
 						</div>
-						<button type="submit" class="btn btn-primary">Send Email</button>
+						<button type="submit" name="forgetMail" class="btn btn-primary">Send Email</button>
 					</form>
 				</div>
 			</div>

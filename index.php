@@ -1,5 +1,11 @@
-<?php
+<?php 
 session_start();
+if(isset($_SESSION['fname'])){
+  header("Location:welcome.php");
+}
+
+
+
 // databace connection
 require_once 'dbconnection.php';
 
@@ -18,7 +24,7 @@ if (isset($_POST['reg'])) {
 	$sql = "INSERT INTO `register`(`fname`, `lname`, `email`, `pwd`, `contract`)
 						 VALUES ('$fname', '$lname', '$email', '$enc_password', '$contract')";
 
-	if ($conn->query($sql) === TRUE) {
+	if ($conn->query($sql) == TRUE) {
 		echo "<script>alert('New record created successfully')</script>";
 	    echo "";
 	} else {
@@ -31,12 +37,14 @@ if (isset($_POST['login'])) {
 	$upass = purify_input($_POST['upass']);
 	$hUpass = $upass;
 
-	$logSql = "SELECT * FROM `register` WHERE 'email'= '$umail' AND 'pwd'= '$hUpass'";
-	$row = $conn->query($logSql); 
-	if ($row > 0) {
-		$_SESSION['regid'] = $_POST['regid'];
-		$_SESSION['umail'] = $_POST['umail'];
-		$_SESSION['fname'] = $_POST['fname'];		
+	$logSql = "SELECT * FROM `register` WHERE email='$umail' AND pwd='$hUpass'";
+	$logResult = $conn->query($logSql);
+	
+	if ($logResult-> num_rows > 0) {
+		$logrow = $logResult->fetch_assoc();
+		$_SESSION['logid'] = $logrow['regid'];
+		$_SESSION['logEmail'] = $_POST['umail'];
+		$_SESSION['fname'] = $logrow['fname'];		
 		$needPage = 'welcome.php';
 		$host = $_SERVER['HTTP_HOST']; // localhost
 		$url = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');

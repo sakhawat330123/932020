@@ -1,12 +1,9 @@
 <?php 
 session_start();
-if(isset($_SESSION['regid']))
+if(!isset($_SESSION['fname'])){
   header("Location:index.php");
-
- ?>
-
-
-
+}
+?>
 
 <?php
 require "include/header.php";

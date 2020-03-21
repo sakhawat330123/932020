@@ -44,7 +44,7 @@
 
  <div class="container">
    <h2>Form control: input</h2>
-   <p>SMS: <?php echo $_SESSION['action1']; ?> <?php echo $_SESSION['action1']=""; ?> </p>
+   <p><?php echo $_SESSION['action1']; ?> <?php echo $_SESSION['action1'] = ""; ?> </p>
    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"  method="post">
      <div class="form-group">
        <label for="username">Name:</label>
